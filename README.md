@@ -46,7 +46,7 @@ fill-level P–T analysis) and the **machine-learning modelling** of the solubil
 
 ## Acknowledgements
 
-- Supervisors: **Dr. Saskia Schimmel** (LEB, FAU), **Victor Michel-Dansac** (MoCo team, IRMA, Université de Strasbourg) and **Markus Zenk**
+- Supervisors: **Dr. Saskia Schimmel** (LEB, FAU), **Dr. Victor Michel-Dansac** (MoCo team, IRMA, Université de Strasbourg) and **Dr. Markus Zenk** (Fraunhofer IISB)
 - The PINN models are built on **[ScimBa](https://gitlab.com/scimba/scimba)** (MIT licence), developed by Emmanuel Franck, Victor Michel-Dansac and colleagues. ScimBa is **not** included in this repository; it is installed as a dependency.
 - My research visit to Strasbourg was funded by the *Technologies d'Avenir* mobility grant.
 
