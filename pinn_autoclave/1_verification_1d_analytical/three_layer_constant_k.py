@@ -433,7 +433,7 @@ def train_optimizer(optimizer_name, seed, n_epochs, learning_rate=None):
         space,
         n_epochs,
         N_COLLOC,
-        tqdmdesc=f"Training {optimizer_name}",
+        tqdm_desc=f"Training {optimizer_name}",
     )
     end = timeit.default_timer()
 

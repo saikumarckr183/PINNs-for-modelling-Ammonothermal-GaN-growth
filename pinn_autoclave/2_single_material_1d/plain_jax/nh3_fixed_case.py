@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 # 1. Problem setup
 
-CSV_PATH = Path(__file__).resolve().parents[2] / "data" / "NH3_data.csv"
+CSV_PATH = Path(__file__).resolve().parents[2] / "data" / "NH3_Data.csv"
 
 L = 0.32
 TL = 420.0

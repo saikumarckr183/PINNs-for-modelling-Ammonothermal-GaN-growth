@@ -214,9 +214,9 @@ class LeftResidual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, *vars):
-        dTdx = T_LEFT.partial_derivative_x(0)
+        dTdx = T_LEFT.partial_derivative("x", 0)
         flux = k_left_fun(T_LEFT) * dTdx
-        raw_res = flux.partial_derivative_x(0)
+        raw_res = flux.partial_derivative("x", 0)
         scale = K_REF * DELTA_T_REF / (dx1**2)
         return raw_res / scale
 
@@ -226,9 +226,9 @@ class MidResidual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, *vars):
-        dTdx = T_MID.partial_derivative_x(0)
+        dTdx = T_MID.partial_derivative("x", 0)
         flux = k_mid_fun(T_MID) * dTdx
-        raw_res = flux.partial_derivative_x(0)
+        raw_res = flux.partial_derivative("x", 0)
         scale = K_REF * DELTA_T_REF / (dx2**2)
         return raw_res / scale
 
@@ -238,9 +238,9 @@ class RightResidual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, *vars):
-        dTdx = T_RIGHT.partial_derivative_x(0)
+        dTdx = T_RIGHT.partial_derivative("x", 0)
         flux = k_right_fun(T_RIGHT) * dTdx
-        raw_res = flux.partial_derivative_x(0)
+        raw_res = flux.partial_derivative("x", 0)
         scale = K_REF * DELTA_T_REF / (dx3**2)
         return raw_res / scale
 
@@ -250,8 +250,8 @@ class InterfaceX1Residual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, *vars):
-        q_left = k_left_fun(T_LEFT) * T_LEFT.partial_derivative_x(0)
-        q_mid = k_mid_fun(T_MID) * T_MID.partial_derivative_x(0)
+        q_left = k_left_fun(T_LEFT) * T_LEFT.partial_derivative("x", 0)
+        q_mid = k_mid_fun(T_MID) * T_MID.partial_derivative("x", 0)
 
         def residual(space, x, mu):
             x_if = jnp.zeros_like(x) + x1
@@ -266,8 +266,8 @@ class InterfaceX2Residual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, *vars):
-        q_mid = k_mid_fun(T_MID) * T_MID.partial_derivative_x(0)
-        q_right = k_right_fun(T_RIGHT) * T_RIGHT.partial_derivative_x(0)
+        q_mid = k_mid_fun(T_MID) * T_MID.partial_derivative("x", 0)
+        q_right = k_right_fun(T_RIGHT) * T_RIGHT.partial_derivative("x", 0)
 
         def residual(space, x, mu):
             x_if = jnp.zeros_like(x) + x2
@@ -410,7 +410,7 @@ def train_adam(seed=42):
         space,
         N_EPOCHS_ADAM,
         N_COLLOC,
-        tqdmdesc="Training Adam multicase",
+        tqdm_desc="Training Adam multicase",
     )
     end = timeit.default_timer()
 

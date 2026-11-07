@@ -131,7 +131,7 @@ class MixedMaterialsPiecewiseResidual(InteriorResidual):
         self.beta = beta
 
     def construct_residual(self, T, precomputed=None):
-        dT_dx = T.partial_derivative_x(0)
+        dT_dx = T.partial_derivative("x", 0)
 
         def x_coord(space, x):
             x = jnp.asarray(x)
@@ -169,7 +169,7 @@ class MixedMaterialsPiecewiseResidual(InteriorResidual):
         )
 
         flux = k_eff * dT_dx
-        raw_residual = flux.partial_derivative_x(0)
+        raw_residual = flux.partial_derivative("x", 0)
 
         residual_scale = K_REF * max(DELTA_T_REF, 1.0) / ((xR - xL) ** 2)
         return raw_residual / residual_scale
@@ -345,7 +345,7 @@ key, pinn1 = pinn1.project(
     space1,
     N_EPOCHS_ADAM,
     N_COLLOC,
-    tqdmdesc="Mixed-material 1D heat equation [Adam]",
+    tqdm_desc="Mixed-material 1D heat equation [Adam]",
 )
 end = timeit.default_timer()
 
@@ -385,7 +385,7 @@ key, pinn2 = pinn2.project(
     space2,
     N_EPOCHS_SSBFGS,
     N_COLLOC,
-    tqdmdesc="Mixed-material 1D heat equation [SS-BFGS]",
+    tqdm_desc="Mixed-material 1D heat equation [SS-BFGS]",
 )
 end = timeit.default_timer()
 
@@ -425,7 +425,7 @@ key, pinn3 = pinn3.project(
     space3,
     N_EPOCHS_ENG,
     N_COLLOC,
-    tqdmdesc="Mixed-material 1D heat equation [ENG]",
+    tqdm_desc="Mixed-material 1D heat equation [ENG]",
 )
 end = timeit.default_timer()
 

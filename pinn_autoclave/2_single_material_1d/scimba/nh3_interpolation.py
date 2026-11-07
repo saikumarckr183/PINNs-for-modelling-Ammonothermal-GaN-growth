@@ -91,10 +91,10 @@ class NH3InterpolationResidual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, T, precomputed=None):
-        dT_dy = T.partial_derivative_x(0)
+        dT_dy = T.partial_derivative("x", 0)
         flux = conductivity(T) * dT_dy
 
-        raw_residual = flux.partial_derivative_x(0)
+        raw_residual = flux.partial_derivative("x", 0)
         residual_scale = K_REF * DELTA_T_REF / (L**2)
         return raw_residual/residual_scale
 
@@ -150,7 +150,6 @@ pinn = Projector(
     space,
     sampler,
     # optimizer="Adam",
-    learning_rate=LEARNING_RATE,
 )
 
 key, sample_dict = sampler.sample(key, N_COLLOC)

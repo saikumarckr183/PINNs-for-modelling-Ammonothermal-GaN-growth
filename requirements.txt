@@ -1,9 +1,12 @@
-# ScimBa (JAX backend), pinned to the development version these scripts were written against
-scimba[scimba_jax] @ git+https://gitlab.com/scimba/scimba.git@82ff0a4b684fc2d6a845f3dece00b1e04e4b4966
-jax
-optax
-numpy
-pandas
-openpyxl
-matplotlib
-scikit-learn
+# ScimBa, pinned to the commit of 19 October 2026 on the public mirror (main branch).
+# The scripts were developed on the scimba_jax branch of the same weeks; they were
+# checked on this commit with short runs. The package also installs torch.
+scimba @ git+https://gitlab.com/scimba/scimba.git@8b24540640313c5fc06b6968c0de6473f832f624
+jax==0.11.0
+jaxlib==0.11.0
+optax==0.2.8
+numpy==2.5.2
+pandas==3.0.5
+openpyxl==3.1.5
+matplotlib==3.11.1
+scikit-learn==1.9.1

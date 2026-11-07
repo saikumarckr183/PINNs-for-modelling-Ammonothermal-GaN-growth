@@ -33,7 +33,7 @@ from scimba_jax.physical_models.abstract_residuals import (
 
 jax.config.update("jax_enable_x64", True)
 
-SAVE_DIR = Path("output_inc_nh3_temp_dependent victor final")
+SAVE_DIR = Path("output_inc_nh3")
 SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Physical geometry and material properties
@@ -3525,7 +3525,7 @@ def extract_fvm_vertical_line(
 # probe radius (as extract_fvm_vertical_line/plot_fvm_vs_pinn above do),
 # this compares all of them and grids the result into one figure plus a
 # per-radius error-summary table. Ported from
-# "2D heat Inconel + Ammonia single case.py".
+# "2D_heat_Inconel_+_Ammonia_single_case.py".
 def plot_fvm_vs_pinn_all_radii(
     space,
     df,
@@ -4771,7 +4771,6 @@ if __name__ == "__main__":
         sampler,
         # optimizer="Adam",
         weights=W_COMMON,
-        learning_rate=LEARNING_RATE,
     )
 
     key = jax.random.PRNGKey(
@@ -4813,7 +4812,7 @@ if __name__ == "__main__":
         N_EPOCHS,
         N_COLLOC,
         N_BC_COLLOC,
-        tqdmdesc="Inconel-NH3 conduction",
+        tqdm_desc="Inconel-NH3 conduction",
     )
 
     elapsed = timeit.default_timer() - start
@@ -4951,7 +4950,7 @@ if __name__ == "__main__":
     )
 
     # All-radii FVM/PINN comparison (grid over every radial line in
-    # 2D_Heat_data.csv), same as "2D heat Inconel + Ammonia single case.py".
+    # 2D_Heat_data.csv), same as "2D_heat_Inconel_+_Ammonia_single_case.py".
     print("\n" + "=" * 72)
     print("RUNNING FVM VS PINN ALL-RADII COMPARISON")
     print("=" * 72)

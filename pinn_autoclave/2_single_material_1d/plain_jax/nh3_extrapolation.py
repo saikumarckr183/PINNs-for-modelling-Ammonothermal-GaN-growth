@@ -12,7 +12,7 @@ import optax
 
 # 1. USER SETTINGS
 
-FILE_PATH = Path(__file__).resolve().parents[2] / "data" / "NH3_data.csv"
+FILE_PATH = Path(__file__).resolve().parents[2] / "data" / "NH3_Data.csv"
 SHEET_NAME = 0
 L = 0.32
 

@@ -140,7 +140,7 @@ class MixedMaterialsExtrapolationResidual(InteriorResidual):
         super().__init__(domain=domain, size=1, model_type="x_mu")
 
     def construct_residual(self, T, precomputed=None):
-        dT_dx = T.partial_derivative_x(0)
+        dT_dx = T.partial_derivative("x", 0)
 
         def x_coord(space, x, mu):
             x = jnp.asarray(x)
@@ -168,7 +168,7 @@ class MixedMaterialsExtrapolationResidual(InteriorResidual):
         )
 
         flux = k_eff * dT_dx
-        raw_residual = flux.partial_derivative_x(0)
+        raw_residual = flux.partial_derivative("x", 0)
 
         residual_scale = K_REF * max(DELTA_T_REF, 1.0) / ((xR - xL) ** 2)
         return raw_residual / residual_scale
@@ -371,7 +371,7 @@ key, pinn = pinn.project(
     space,
     N_EPOCHS_ADAM,
     N_COLLOC,
-    tqdmdesc="Mixed-material extrapolation [Adam]",
+    tqdm_desc="Mixed-material extrapolation [Adam]",
 )
 end = timeit.default_timer()
 
@@ -414,7 +414,7 @@ key, pinn2 = pinn2.project(
     space2,
     N_EPOCHS_SSBFGS,
     N_COLLOC,
-    tqdmdesc="Mixed-material extrapolation [SS-BFGS]",
+    tqdm_desc="Mixed-material extrapolation [SS-BFGS]",
 )
 end = timeit.default_timer()
 
@@ -457,7 +457,7 @@ key, pinn3 = pinn3.project(
     space3,
     N_EPOCHS_ENG,
     N_COLLOC,
-    tqdmdesc="Mixed-material extrapolation [ENG]",
+    tqdm_desc="Mixed-material extrapolation [ENG]",
 )
 end = timeit.default_timer()
 

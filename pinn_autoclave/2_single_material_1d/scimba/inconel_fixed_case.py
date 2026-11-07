@@ -134,7 +134,6 @@ pinn = Projector(
     space,
     sampler,
    #  optimizer="Adam",
-    learning_rate=LEARNING_RATE,
 )
 
 key, sample_dict = sampler.sample(key, N_COLLOC)

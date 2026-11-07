@@ -24,13 +24,16 @@ the JAX version of the ScimBa library. The models were developed step by step:
 1. **Verification:** a 1D three-layer conduction problem with an analytical solution
 2. **Single material, temperature-dependent conductivity k(T):** Inconel and NH₃, written in ScimBa *and* as a plain JAX/Optax implementation
 3. **Multi-material 1D:** piecewise and smoothed conductivity at material interfaces
-4. **2D axisymmetric autoclave:** Inconel + NH₃, then with one and two GaN parts, using one network per material region with interface coupling
-5. **Navier–Stokes (in progress):** steady Boussinesq flow of NH₃ in 2D axisymmetric and 3D geometries
+4. **2D axisymmetric autoclave, steady:** Inconel + NH₃, then with one GaN rod and with two GaN pieces, using one network per material region with interface coupling; one parametric model covers all wall temperature profiles of the CrysMAS data
+5. **2D axisymmetric autoclave, transient:** heating of Inconel + NH₃ over 0 to 7200 s, with global space-time PINNs and time-discrete PINNs (implicit Euler and the Alexander scheme, with uniform and adaptive time steps)
+6. **Navier–Stokes (in progress):** Boussinesq flow of NH₃ in 2D axisymmetric and 3D geometries
 
-Each stage covers a fixed case, **interpolation** and **extrapolation** to unseen boundary temperatures.
+The 1D stages each cover a fixed case, **interpolation** and **extrapolation** to unseen boundary temperatures.
 
-<!-- TODO (SK): add one key figure here, e.g. PINN vs CrysMAS temperature field:
-![PINN vs FV reference](pinn_autoclave/figures/inconel_nh3_comparison.png) -->
+![Steady 2D: PINN temperature and error against CrysMAS](pinn_autoclave/figures/steady_2d_overview.png)
+
+*Steady conduction, T₀ = 611.15 K, T₁ = −300 K/m: PINN temperature with two GaN pieces, and PINN minus CrysMAS for
+the three final models (RMSE 0.069 K, 0.072 K and 0.189 K). More results in [`pinn_autoclave/README.md`](pinn_autoclave/).*
 
 → Details, how to run the scripts and the file overview: [`pinn_autoclave/README.md`](pinn_autoclave/)
 

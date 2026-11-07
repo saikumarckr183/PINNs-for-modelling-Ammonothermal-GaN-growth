@@ -372,7 +372,7 @@ def train_optimizer(optimizer_name, seed, n_epochs, learning_rate=None):
     losses0 = pinn.evaluate_losses(space, sample_dict)
     print("initial losses:", losses0)
     start = timeit.default_timer()
-    key, pinn = pinn.project(key, space, n_epochs, N_COLLOC, tqdmdesc=f"Training {optimizer_name}")
+    key, pinn = pinn.project(key, space, n_epochs, N_COLLOC, tqdm_desc=f"Training {optimizer_name}")
     end = timeit.default_timer()
     print("best loss:", pinn.best_loss)
     print(f"time for {n_epochs} epochs:", end - start)
