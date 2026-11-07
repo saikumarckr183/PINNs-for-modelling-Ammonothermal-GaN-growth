@@ -1,0 +1,16 @@
+# reference data are not published
+pinn_autoclave/data/*
+!pinn_autoclave/data/README.md
+
+# run outputs
+output*/
+outputs*/
+stage*_outputs*/
+nh3_stage*_outputs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.DS_Store
